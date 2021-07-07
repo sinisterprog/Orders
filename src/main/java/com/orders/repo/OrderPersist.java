@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -13,7 +14,10 @@ public class OrderPersist {
     @Id
     @GeneratedValue
     Long id;
+    @NotNull(message = "Coin must be defined.")
+    @Pattern(regexp="(ETH|ADA|XLM)", message = "Coin must be ETH|ADA|XLM")
     String coin;
+    @NotNull(message = "amount must be defined.")
     double amount;
     String extra1;
     String extra2;
@@ -28,7 +32,6 @@ public class OrderPersist {
     public OrderPersist() {
     }
 
-    @Pattern(regexp="(ETH|ADA|XLM)")
     public String getCoin() {
         return coin;
     }
